@@ -17,10 +17,11 @@ function initapplication() {
   cancelModal.addEventListener("click", closeModal);
   save.addEventListener("click", saveModal);
   addExperienceBtn.addEventListener("click",addexperrience);
+  imgprofile.addEventListener("input", change_img);
 }
 
 function openModal() {
-  imgprofile.addEventListener("input", change_img);
+ 
   showModal.classList.replace("hidden", "modal-VS");
   backgroundvisibilty.classList.add("blur-sm");
 }
@@ -54,15 +55,19 @@ function creatCart() {
   let mydiv = document.createElement("div");
 
   data.forEach((ele) => {
-    mydiv.innerHTML = `<div class="border-0 rounded-4xl bg-blue-300 shadow-cyan-100 h-30"> 
+    mydiv.innerHTML = `<div class="border-0 rounded-4xl bg-blue-300 shadow-cyan-100 h-30  "> 
                <div class="flex">
-              <span class="text-black text-center">${ele.name}</span>
+              <span class="text-black text-center">${ele.name}<span>
               <img src="${ele.url}" alt="the img profil in the cart" class="h-10 w-10 border-0 rounded-4xl">
-              <button type="button" class="text-white bg-red-700 hover:sm:ml-3 sm:w-auto transition duration-500 hover:scale-105 cursor-pointer delete-btn" data-index="${index}">
-                <img src="/photo/trash.svg" alt="trash_logo" class="h-2 w-2">
-              </button>
+               >
+<button type="button" class="text-white bg-red-700 hover: sm:ml-3 sm:w-auto transition duration-500 hover:scale-105 cursor-pointer">
+<svg  class="h-2 w-2">
+<img src="../photo/trash.svg/" alt="trash_logo" >
+</svg>
+</button>
                   </div>
-</div>`;;
+
+</div>`;
 
     backgroundvisibilty.appendChild(mydiv);
   });
@@ -72,9 +77,9 @@ function addexperrience() {
 
   let myExperienceInput = document.createElement("input");
   myExperienceInput.setAttribute("type", "text"),
+  myExperienceInput.setAttribute("placeholder","Experience")
     myExperienceInput.classList=
-      "w-90 h-20 p-3 ps-9 ml-2 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-4xl mt-2 focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
-    ;
+      "w-90 h-20 p-3 ps-9 ml-2 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-4xl mt-2 focus:ring-brand focus:border-brand shadow-xs placeholder:text-body";
   experiencePlace.appendChild(myExperienceInput);
 }
 
