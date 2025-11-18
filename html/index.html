@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="/css/style.css" /> -->
+    <link rel="stylesheet" href="/css/output.css" />
+    <link
+      href="/your-path-to-uicons/css/uicons-[your-style].css"
+      rel="stylesheet"
+    />
+
+    <script src="/script/script.js" defer></script>
+  </head>
+  <body>
+    <header></header>
+    <section>
+      <div class="sidebar flex justify-between mt-12">
+        
+        <div
+          class="visibilty w-120 max-w-sm bg-neutral-primary-soft border border-default rounded-3xl shadow-xs h-200 ml-2"
+        >
+
+          <form class="max-w-md mx-auto">
+            <label
+              for="search"
+              class="block mb-2.5 text-sm font-medium text-heading sr-only"
+              >Search</label
+            >
+            <div class="relative">
+              <div
+                class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+              >
+                <svg
+                  class="w-4 h-4 text-body"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-width="2"
+                    d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"
+                  />
+                </svg>
+              </div>
+              <input
+                type="search"
+                id="search"
+                class="block w-90 p-3 ps-9 ml-2 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-4xl mt-2 focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
+                placeholder="Search"
+                required
+              />
+            </div>
+          </form>
+          <div class="flex justify-center pt-5">
+            <button
+              class="border-sky-200 rounded-[50%] bg-blue-500 transform transition duration-500 hover:scale-105 w-10 h-10 cursor-pointer"
+              id="add_btn"
+            >
+              <img src="/photo/plus-small.svg" alt="" />
+              
+            </button>
+          </div>
+          
+
+
+        </div>
+        <!-- image -->
+         
+        <div
+          class="place grid grid-cols-4 grid-rows-3 bg-[url(../photo/plan-60.jpg)] bg-no-repeat bg-cover bg-center h-120 w-250"
+        >
+          <div class="col-start-4 row-start-1 h-30 w-50">
+            <button class="transition duration-500 hover:scale-105 cursor-pointer pl-20 pt-14">
+            <img
+              src="/photo/plus-small.svg"
+              alt=""
+              class="h-10 w-10 border-4 bg-green-300 rounded-4xl"
+            />
+            </button>
+          </div>
+          <div class="col-start-3 row-start-1  h-30 w-50">
+            <button class="transition duration-500 hover:scale-105 cursor-pointer pl-20 pt-14">
+            <img
+              src="/photo/plus-small.svg"
+              alt=""
+              class="h-10 w-10 border-4 bg-green-300 rounded-4xl justify-end"
+            />
+            </button class="transition duration-500 hover:scale-105 cursor-pointer ">
+          </div>
+
+          <div class="col-start-1 row-start-1  h-30 w-50">
+            <button class="transition duration-500 hover:scale-105 cursor-pointer pl-20 pt-14">
+            <img
+              src="/photo/plus-small.svg"
+              alt=""
+              class="h-10 w-10 border-4 bg-green-300 rounded-4xl"
+            />
+            </button>
+          </div>
+
+          <div class="row-span-2 row-start-2 h-30 w-50">
+            <button class="transition duration-500 hover:scale-105 cursor-pointer pl-20 pt-14">
+            <img
+              src="/photo/plus-small.svg"
+              alt=""
+              class="h-10 w-10 border-4 bg-green-300 rounded-4xl"
+            />
+            </button>
+          </div>
+          <div class="col-start-3 row-start-3  h-30 w-50">
+            <button class="transition duration-500 hover:scale-105 cursor-pointer pl-20 pt-14">
+            <img
+              src="/photo/plus-small.svg"
+              alt=""
+              class="h-10 w-10 border-4 bg-green-300 rounded-4xl"
+            />
+            </button>
+          </div>
+          <div class="col-start-4 row-start-3  h-30 w-50">
+            <button class="transition duration-500 hover:scale-105 cursor-pointer pl-20 pt-14">
+            <img
+              src="/photo/plus-small.svg"
+              alt=""
+              class="h-10 w-10 border-4 bg-green-300 rounded-4xl"
+            />
+            </button>
+          </div>
+        </div>
+        
+
+        <!-- modal -->
+        <div class="hidden">
+          <div
+            class="flex mr-100 mb-24 min-h-full items-end p-4 text-center focus:outline-none sm:items-center sm:p-0"
+          >
+            <div
+              class="transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
+            >
+              <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div
+                  class="mx-auto flex size-12 items-center justify-center sm:mx-0 sm:size-10"
+                ></div>
+                <button
+                  class="h-10 w-10 justify-end transform transition duration-500 hover:scale-105 cursor-pointer"
+                  id="cancel"
+                >
+                  <img src="/photo/cross-small.svg" alt="" />
+                </button>
+
+                <h3 class="text-base font-semibold text-gray-900 text-center">
+                  Ajoute un novelle
+                </h3>
+                <div class="flex justify-center">
+                  <img
+                    src=""
+                    alt=""
+                    class="rounded-4xl h-10 w-10"
+                    id="img_pro"
+                  />
+                </div>
+
+                <div class="mt-3 text-center sm:mt-4 sm:ml-1 sm:text-left">
+                  <div class="mt-2">
+                    <form>
+                    <label for="img_url">photo</label>
+                    <input
+                      type="text"
+                      placeholder="URL"
+                      id="img_url"
+                      class="block w-90 p-3 ps-9 ml-2 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-4xl mt-2 focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
+                    />
+
+                    <label for="name">nom</label>
+                    <input
+                      type="text"
+                      id="name"
+                      class="block w-90 p-3 ps-9 ml-2 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-4xl mt-2 focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
+                      placeholder="nom"
+                      required
+                    />
+
+                    <label for="age">Age</label>
+                    <input
+                      type="text"
+                      id="age"
+                      class="block w-90 p-3 ps-9 ml-2 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-4xl mt-2 focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
+                      placeholder="age"
+                      required
+                    />
+
+                    <label for="phone_number">telephone</label>
+                    <input
+                      type="text"
+                      id="phone_number"
+                      class="block w-90 p-3 ps-9 ml-2 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-4xl mt-2 focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
+                      placeholder="telephone"
+                      required
+                    />
+
+                    <label for="post">post</label>
+
+                    <select
+                      id="post"
+                      class="block w-90 p-3 ps-9 ml-2 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-4xl mt-2 focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
+                    >
+                      <option>Réceptionniste</option>
+                      <option>Technicien IT</option>
+                      <option>Agent de sécurité</option>
+                      <option>Manager</option>
+                      <option>Nettoyage</option>
+                      <option>Autres rôles</option>
+                    </select>
+                    <label for="email">email</label>
+                   <input type="email" id="email" class="w-90 p-3 ps-9 ml-2 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-4xl mt-2 focus:ring-brand focus:border-brand shadow-xs placeholder:text-body" placeholder="email" required>
+                     <div class="justify-between">
+                        <div class="experiencepalce">
+                   <label for="workerExperience">Experience</label>
+                    <input type="text" name="" id="workerExperience" class="w-90 h-20 p-3 ps-9 ml-2 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-4xl mt-2 focus:ring-brand focus:border-brand shadow-xs placeholder:text-body " placeholder="Experience" required>
+                   </div>
+                    <button 
+                    type="button"
+                    class="mt-3 inline-flex w-full justify-center rounded-md bg-emerald-400 px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-emerald-200 sm:mt-0 sm:w-auto transition duration-500 hover:scale-105 cursor-pointer" id="addexperrience">
+                       + add Experience
+                    </button>
+                     </div>
+                    <div
+                    class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 justify-center" >
+                    <button
+                  type="submit"
+                
+                  class="inline-flex w-full justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-blue-600 sm:ml-3 sm:w-auto transition duration-500 hover:scale-105 cursor-pointer"
+                  id="save"
+                >
+                save
+            </button>
+                   
+                <!-- <button
+                  type="button"
+                  class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto transition duration-500 hover:scale-105 cursor-pointer"
+                >
+                  modifier
+                </button> -->
+              </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              
+                
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
