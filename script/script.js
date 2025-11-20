@@ -13,8 +13,8 @@ let form = document.querySelector("#form");
 let secutityBtn=document.getElementById("salleSecuriteBtn");
 let serveurBtn=document.getElementById("salleServeursBtn");
 let personnelBtn=document.getElementById("sallePersonnelBtn");
-let ReceptionBtnBtn=document.getElementById("ReceptionBtn");
-let ConferenceBtn=document.getElementById("salleConferenceBtn");
+let receptionBtn=document.getElementById("ReceptionBtn");
+let conferenceBtn=document.getElementById("salleConferenceBtn");
 let archiveBtn=document.getElementById("salleArchiveBtn");
 let deletWorker=document.querySelector("#deletExpbtn");
 
@@ -22,12 +22,20 @@ let deletWorker=document.querySelector("#deletExpbtn");
 let cancelModal = document.getElementById("cancel");
 let save = document.getElementById("save");
 
+
+
 function initapplication() {
   addWorkerBtn.addEventListener("click", openModal);
   cancelModal.addEventListener("click", closeModal);
   save.addEventListener("click", saveModal);
   addExperienceBtn.addEventListener("click", addexperrience);
   imgprofile.addEventListener("input", change_img);
+  archiveBtn.addEventListener("click",addWorkerArchive);
+  serveurBtn.addEventListener("click",addWorkerserveurs);
+  secutityBtn.addEventListener("click",addWorkerSecurite);
+  personnelBtn.addEventListener("click",addWorkerPersonnel);
+  conferenceBtn.addEventListener("click",addWorkerConference);
+  receptionBtn.addEventListener("click",addWorkerReception);
  
 }
 
@@ -58,6 +66,7 @@ function saveModal(event) {
     age: document.getElementById("age").value,
     phone: document.getElementById("phone_number").value,
     post: document.getElementById("post").value,
+    id: Math.random()*1000,
     
   };
   data.push(info);
@@ -71,7 +80,8 @@ function creatCart() {
 
   data.forEach((ele) => {
     mydiv.innerHTML = `<div class="cart  border-0 rounded-4xl bg-gray-600 shadow-cyan-100 h-25 w-90 mt-6 ml-3 onclick="infoWorker()">
-              <span class="text-white text-center pl-10">${ele.name}<span>
+              <span class="text-white text-center pl-10">${ele.name}<span> <br>
+               
                <div class="flex justify-between">
               <img src="${ele.url}" alt="the img profil in the cart" class="h-12 w-12 rounded-4xl">
                
@@ -101,35 +111,42 @@ function deletCart(){
 
 }
 
+
+// infoWorker(): this function display the information about workers when we click a button(show). Problem
 function infoWorker(){
 let divinfoModal=document.createElement("div");
 placework.classList.replace("place","hidden");
  backgroundvisibilty.classList.add("blur-sm");
 
 
-data.forEach(ele=>{
-divinfoModal.innerHTML=`<div class="hidden bg-blue-200 p-6 border-3 rounded-3xl shadow-xs">
-    <a href="#">
-        <img class="rounded-4xl" src="${data.url}" alt="" />
-    </a>
-    <a href="#">
-        <h5 class="mt-6 mb-2 text-2xl font-semibold tracking-tight text-heading">${data.name}</h5>
-    </a>
-    <span class="mb-6 text-body">${data.experience.exp}</span>
-    <span>start in : ${data.exp.dateStart}</span>
-    <span>start in : ${data.exp.dateEnd}</span>
-    
-    <a href="#" class="inline-flex items-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-        Read more
-        <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/></svg>
-    </a>
-</div>`
+data.forEach((ele)=>{
+divinfoModal.innerHTML=`
+          
+            <div
+              class=" modalZones flex relative overflow-hidden h-200 w-190 justify-center rounded-lg bg-white text-left shadow-xl transition-all">
+              <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div
+                  class="mx-auto flex size-12 items-center justify-center sm:mx-0 sm:size-10">
+                  <button onclick="closeModalZone()">
+                <img src="/photo/cross-small.svg" alt="">
+                  </button>
+                 
+               
+               
+                </div>
+                <span>name : ${ele.name}</span>
+                  </div>
+                </div>
+              </div>
+            `
 
 });
-divinfoModal.classList.remove("hidden");
+
 sidebar.appendChild(divinfoModal);
 
 }
+
+// addexperrience(): this function creat a cart (input) to add athores expriences
 function addexperrience() {
   let experiencePlace = document.querySelector(".experiencepalce");
 
@@ -172,5 +189,249 @@ function addexperrience() {
 
 }
 
+
+// add workers in zones
+// ModalWorkersZone(): this function creet a modal of the workers who already filterd . i add this function in all the 6 filter function 
+function ModalWorkersZone(){
+    let divafficheinfo=document.createElement("div");
+
+divafficheinfo.innerHTML=`
+          <div
+            class="modalZones flex mr-100 mb-24  min-h-full  items-end p-4 text-center focus:outline-none sm:items-center sm:p-0"
+          >
+            <div
+              class="transform  overflow-visible h-200 w-100 rounded-lg bg-white text-left shadow-xl transition-all">
+              <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div
+                  class="mx-auto flex size-12 items-center justify-center sm:mx-0 sm:size-10">
+                  <button onclick="closeModalZone()">
+                <img src="/photo/cross-small.svg" alt="">
+                  </button>
+                </div>
+                  </div>
+                </div>
+              </div>
+            `;
+
+sidebar.appendChild(divafficheinfo);
+
+return divafficheinfo;
+}
+
+// function to close tehe modal after click on eny zone plus
+function closeModalZone(){
+let cancelModalZones=document.querySelector(".modalZones");
+cancelModalZones.classList.replace("modalZones","hidden");
+backgroundvisibilty.classList.remove("blur-sm");
+ placework.classList.replace("hidden","place");
+
+}
+// function addWorkerArchive() : the funcrion do  filter of workers whocan  get inside the archive zone
+function addWorkerArchive(){
+     ModalWorkersZone();
+     
+  backgroundvisibilty.classList.add("blur-sm");
+  placework.classList.replace("place","hidden");
+
+    let workersArchiveZone=data.post.filter(w=>data.info.post === "Manager");
+    let catrWorkerArchive=document.createElement("div");
+    workersArchiveZone.forEach(w=>{
+        catrWorkerArchive.innerHTML=`<div class="cart  border-0 rounded-4xl bg-gray-600 shadow-cyan-100 h-25 w-90 mt-6 ml-3 onclick="infoWorker()">
+              <span class="text-white text-center pl-10">${ele.name}<span>
+               <div class="flex justify-between">
+              <img src="${ele.url}" alt="the img profil in the cart" class="h-12 w-12 rounded-4xl">
+               
+                
+                
+    <button type="button" id="deletExpbtn" onclick="deletCart()" class=" border-0 mr-10  hover: transition duration-500 hover:scale-105 cursor-pointer">
+
+<img src="/photo/delete.svg" alt="" >
+
+</button>
+                  </div>
+
+                  <button onclick="infoWorker()" class="pl-70">
+                <span class="text-white">show</span>
+</button>
+                  
+
+</div>`
+
+    })
+     divafficheinfo.appendChild(catrWorkerArchive);
+}
+
+
+// function addWorkerserveurs() : the funcrion do  filter of workers whocan  get inside the serveurs zone
+function addWorkerserveurs(){
+     ModalWorkersZone();
+     backgroundvisibilty.classList.add("blur-sm");
+     placework.classList.replace("place","hidden");
+    let workersServeurs=data.post.filter(w=>data.info.post === "Technicien IT");
+    let catrWorkerServeur=document.createElement("div");
+    workersServeurs.forEach(w=>{
+        catrWorkerServeur.innerHTML=`<div class="cart  border-0 rounded-4xl bg-gray-600 shadow-cyan-100 h-25 w-90 mt-6 ml-3 onclick="infoWorker()">
+              <span class="text-white text-center pl-10">${ele.name}<span>
+               <div class="flex justify-between">
+              <img src="${ele.url}" alt="the img profil in the cart" class="h-12 w-12 rounded-4xl">
+               
+                
+                
+    <button type="button" id="deletExpbtn" onclick="deletCart()" class=" border-0 mr-10  hover: transition duration-500 hover:scale-105 cursor-pointer">
+
+<img src="/photo/delete.svg" alt="" >
+
+</button>
+                  </div>
+
+                  <button onclick="infoWorker()" class="pl-70">
+                <span class="text-white">show</span>
+</button>
+                  
+
+</div>`
+
+    })
+    divafficheinfo.appendChild(catrWorkerServeur);
+}
+
+
+// function addWorkerSecurite() : the function do a filter oto workers who can  get inside the security zone
+
+    function addWorkerSecurite(){
+         ModalWorkersZone();
+   backgroundvisibilty.classList.add("blur-sm");
+  placework.classList.replace("place","hidden");
+
+    let workersSecurite=data.post.filter(w=>data.info.post === "Agent de sécurité");
+    let catrWorkersecurite=document.createElement("div");
+    workersSecurite.forEach(w=>{
+        catrWorkersecurite.innerHTML=`<div class="cart  border-0 rounded-4xl bg-gray-600 shadow-cyan-100 h-25 w-90 mt-6 ml-3 onclick="infoWorker()">
+              <span class="text-white text-center pl-10">${ele.name}<span>
+               <div class="flex justify-between">
+              <img src="${ele.url}" alt="the img profil in the cart" class="h-12 w-12 rounded-4xl">
+               
+                
+                
+    <button type="button" id="deletExpbtn" onclick="deletCart()" class=" border-0 mr-10  hover: transition duration-500 hover:scale-105 cursor-pointer">
+
+<img src="/photo/delete.svg" alt="" >
+
+</button>
+                  </div>
+
+                  <button onclick="infoWorker()" class="pl-70">
+                <span class="text-white">show</span>
+</button>
+                  
+
+</div>`
+
+    })
+    divafficheinfo.appendChild(catrWorkersecurite);
+}
+
+
+// function addWorkerReception() : the function do a filter oto workers who can  get inside the reception zone
+function addWorkerReception(){
+     ModalWorkersZone();
+      backgroundvisibilty.classList.add("blur-sm");
+      placework.classList.replace("place","hidden");
+
+    let workersReception=data.post.filter(w=>data.info.post === "Réceptionnistes");
+    let catrWorkerReception=document.createElement("div");
+    workersReception.forEach(w=>{
+        catrWorkerReception.innerHTML=`<div class="cart  border-0 rounded-4xl bg-gray-600 shadow-cyan-100 h-25 w-90 mt-6 ml-3 onclick="infoWorker()">
+              <span class="text-white text-center pl-10">${ele.name}<span>
+               <div class="flex justify-between">
+              <img src="${ele.url}" alt="the img profil in the cart" class="h-12 w-12 rounded-4xl">
+               
+                
+                
+    <button type="button" id="deletExpbtn" onclick="deletCart()" class=" border-0 mr-10  hover: transition duration-500 hover:scale-105 cursor-pointer">
+
+<img src="/photo/delete.svg" alt="" >
+
+</button>
+                  </div>
+
+                  <button onclick="infoWorker()" class="pl-70">
+                <span class="text-white">show</span>
+</button>
+                  
+
+    </div>`})
+    divafficheinfo.appendChild(catrWorkerReception);
+}
+
+
+// function addWorkerConference() : the function do a filter oto workers who can  get inside the cenference zone
+
+function addWorkerConference(){
+     ModalWorkersZone();
+      backgroundvisibilty.classList.add("blur-sm");
+      placework.classList.replace("place","hidden");
+
+    let workersConference=data.post.filter(w=>data.info.post === "Nettoyage" || "Manager" || "Autres rôles ");
+    let catrWorkerConference=document.createElement("div");
+    workersConference.forEach(w=>{
+        catrWorkerConference.innerHTML=`<div class="cart  border-0 rounded-4xl bg-gray-600 shadow-cyan-100 h-25 w-90 mt-6 ml-3 onclick="infoWorker()">
+              <span class="text-white text-center pl-10">${ele.name}<span>
+               <div class="flex justify-between">
+              <img src="${ele.url}" alt="the img profil in the cart" class="h-12 w-12 rounded-4xl">
+               
+                
+                
+    <button type="button" id="deletExpbtn" onclick="deletCart()" class=" border-0 mr-10  hover: transition duration-500 hover:scale-105 cursor-pointer">
+
+<img src="/photo/delete.svg" alt="" >
+
+</button>
+                  </div>
+
+                  <button onclick="infoWorker()" class="pl-70">
+                <span class="text-white">show</span>
+</button>
+                  
+
+    </div>`})
+    divafficheinfo.appendChild(catrWorkerConference);
+}
+
+// function addWorkerPersonnel() : the function do a filter oto workers who can  get inside the personnel  zone
+function addWorkerPersonnel(){
+     ModalWorkersZone();
+      backgroundvisibilty.classList.add("blur-sm");
+      placework.classList.replace("place","hidden");
+
+    let workersPersonnel=data.post.filter(w=>data.info.post === "Nettoyage" || "Manager" || "Autres rôles ");
+    let catrWorkerPersonnel=document.createElement("div");
+    workersPersonnel.forEach(w=>{
+        catrWorkerPersonnel.innerHTML=`<div class="cart  border-0 rounded-4xl bg-gray-600 shadow-cyan-100 h-25 w-90 mt-6 ml-3 onclick="infoWorker()">
+              <span class="text-white text-center pl-10">${ele.name}<span>
+               <div class="flex justify-between">
+              <img src="${ele.url}" alt="the img profil in the cart" class="h-12 w-12 rounded-4xl">
+               
+                
+                
+    <button type="button" id="deletExpbtn" onclick="deletCart()" class=" border-0 mr-10  hover: transition duration-500 hover:scale-105 cursor-pointer">
+
+<img src="/photo/delete.svg" alt="" >
+
+</button>
+                  </div>
+
+                  <button onclick="infoWorker()" class="pl-70">
+                <span class="text-white">show</span>
+</button>
+                  
+
+    </div>`})
+    divafficheinfo.appendChild(catrWorkerPersonnel);
+}
+
+
+
 initapplication();
+
 

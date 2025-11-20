@@ -24,6 +24,7 @@
     --color-emerald-50: oklch(97.9% 0.021 166.113);
     --color-emerald-100: oklch(95% 0.052 163.051);
     --color-emerald-200: oklch(90.5% 0.093 164.15);
+    --color-emerald-300: oklch(84.5% 0.143 164.978);
     --color-emerald-400: oklch(76.5% 0.177 163.223);
     --color-emerald-700: oklch(50.8% 0.118 165.612);
     --color-emerald-900: oklch(37.8% 0.077 168.94);
@@ -417,6 +418,9 @@
   .mt-6 {
     margin-top: calc(var(--spacing) * 6);
   }
+  .mt-10 {
+    margin-top: calc(var(--spacing) * 10);
+  }
   .mt-12 {
     margin-top: calc(var(--spacing) * 12);
   }
@@ -431,6 +435,12 @@
   }
   .mr-20 {
     margin-right: calc(var(--spacing) * 20);
+  }
+  .mr-30 {
+    margin-right: calc(var(--spacing) * 30);
+  }
+  .mr-50 {
+    margin-right: calc(var(--spacing) * 50);
   }
   .mr-100 {
     margin-right: calc(var(--spacing) * 100);
@@ -716,6 +726,12 @@
   }
   .w-120 {
     width: calc(var(--spacing) * 120);
+  }
+  .w-150 {
+    width: calc(var(--spacing) * 150);
+  }
+  .w-190 {
+    width: calc(var(--spacing) * 190);
   }
   .w-200 {
     width: calc(var(--spacing) * 200);
@@ -1047,6 +1063,12 @@
   }
   .bg-emerald-100 {
     background-color: var(--color-emerald-100);
+  }
+  .bg-emerald-200 {
+    background-color: var(--color-emerald-200);
+  }
+  .bg-emerald-300 {
+    background-color: var(--color-emerald-300);
   }
   .bg-emerald-400 {
     background-color: var(--color-emerald-400);
