@@ -343,7 +343,7 @@ function serveurZone() {
         <div class="flex justify-between">
         <img class="h-12 w-12 rounded-4xl" src="${w.url}">
        
-          <button id="${w.id}" class=" border-0 rounded-full bg-blue-500 h-9 w-9">
+          <button id="btn-${w.id}" class=" border-0 rounded-full bg-blue-500 h-9 w-9">
              <span class="material-symbols-outlined">
                      add
                         </span>
@@ -352,10 +352,11 @@ function serveurZone() {
         
       </div>
     `;
+    
 
     ModalFilter.appendChild(card);
-    let addbtn=document.querySelector(w.id);
-   addbtn .addEventListener("click",()=>{
+    let addbtn=document.querySelector(`#btn-${w.id}`);
+   addbtn.addEventListener("click",()=>{
       serveurSalle.appendChild(card);
     })
   });
