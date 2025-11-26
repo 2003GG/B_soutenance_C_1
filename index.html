@@ -76,12 +76,12 @@
      
          
         <div
-          class="place grid grid-cols-4 grid-rows-3  h-120 w-250  ml-3 md:place grid grid-cols-1 grid-rows-11"
+          class="place grid grid-cols-4 grid-rows-5  h-120 w-250 gap-10 ml-3 md:place grid grid-cols-1 grid-rows-11 gap-10"
         >
-          <div class="col-start-4 row-start-1 h-40 w-45 ml-5 border-2 rounded-3xl bg-red-500 sm:row-start-1 ">
-            <div>
+          <div id="security-salle" class="salle col-start-4 row-span-2 h-100 w-45 ml-5 border-2 rounded-3xl bg-red-500 sm:row-start-1 ">
+            <div class="security-salle">
             <span class="text-white ml-9">Salle de sécurité</span>
-            <button class="transition duration-500 hover:scale-105 cursor-pointer pl-20 pt-14" id="salleSecuriteBtn">
+            <button class="salle-btn transition duration-500 hover:scale-105 cursor-pointer pl-20 pt-14" id="salleSecuriteBtn">
             <img
               src="/photo/plus-small.svg"
               alt=""
@@ -90,10 +90,10 @@
             </button>
             </div>
           </div>
-          <div class="serveurs-salle col-start-3 row-start-1  h-40 w-48 ml-9 border-2 rounded-3xl bg-red-500 md:row-start-3">
-            <div>
+          <div id="serveurs-salle" class="salle col-start-3 row-span-1  h-100 w-60  border-2 rounded-3xl bg-red-500 md:row-start-3">
+            <div class="serveurs-salle">
             <span class="text-white ml-7">Salle des serveurs</span>
-            <button class="transition duration-500 hover:scale-105 cursor-pointer pl-20 pt-14" id="salleServeursBtn">
+            <button class="salle-btn transition duration-500 hover:scale-105 cursor-pointer pl-20 pt-14" id="salleServeursBtn">
             <img
               src="/photo/plus-small.svg"
               alt=""
@@ -103,10 +103,10 @@
           </div>
           </div>
 
-          <div class="col-start-1 row-start-1  h-38 w-83 border-2 rounded-3xl bg-gray-800 md:row-start-5">
-            <div class="flex justify-center">
+          <div id="personnel-salle" class="salle col-start-1 row-start-1  h-100 w-83 border-2 rounded-3xl bg-gray-800 md:row-start-5">
+            <div class="personnel-salle flex justify-center">
                 <span class="text-white">Salle du personnel</span>
-            <button class="transition duration-500 hover:scale-105 cursor-pointer pl-20 pt-14" id="sallePersonnelBtn">
+            <button class="salle-btn transition duration-500 hover:scale-105 cursor-pointer pl-20 pt-14" id="sallePersonnelBtn">
             <img
               src="/photo/plus-small.svg"
               alt=""
@@ -116,10 +116,10 @@
             </div>
           </div>
 
-          <div class="row-span-2 row-start-2 h-80 w-84 border-2 rounded-3xl bg-gray-800 md:row-start-7">
-            <div class="flex justify-center">
+          <div id="Reception-salle" class="salle row-span-3 row-start-2 h-80 w-84 border-2 rounded-3xl bg-gray-800 md:row-start-7">
+            <div class="Reception-salle flex justify-center">
             <span class="text-white">Réception</span>
-            <button class="transition duration-500 hover:scale-105 cursor-pointer pl-20 pt-14 "id="ReceptionBtn">
+            <button class="salle-btn transition duration-500 hover:scale-105 cursor-pointer pl-20 pt-14 "id="ReceptionBtn">
             <img
               src="/photo/plus-small.svg"
               alt=""
@@ -128,10 +128,10 @@
             </button>
             </div>
           </div>
-          <div class="col-start-3 row-start-3  h-40 w-48 ml-10 border-2 rounded-3xl bg-gray-800 md:row-start-9">
-           <div>
+          <div id="conference-salle" class="salle col-start-3 row-start-2  h-40 w-48 ml-10 border-2 rounded-3xl bg-gray-800 md:row-start-9">
+           <div class="conference-salle">
             <span class="text-white pl-7">Salle de conférence</span>
-            <button class="transition duration-500 hover:scale-105 cursor-pointer pl-20 pt-14" id="salleConferenceBtn">
+            <button class="salle-btn transition duration-500 hover:scale-105 cursor-pointer pl-20 pt-14" id="salleConferenceBtn">
             <img
               src="/photo/plus-small.svg"
               alt=""
@@ -141,10 +141,11 @@
           </div>
 
           </div>
-          <div class="col-start-4 row-start-3  h-39 w-48 ml-4 border-2 rounded-3xl bg-red-500 md:row-start-11">
-            <div>
+          <div id="archive-salle" class="salle col-start-4 row-start-2 row-span-2 h-39 w-48  border-2 rounded-3xl bg-red-500 md:row-start-11">
+            <div class="archive-salle">
             <span class="text-white pl-6">Salle d’archives</span>
-            <button class="transition duration-500 hover:scale-105 cursor-pointer pl-20 pt-14" id="salleArchiveBtn">
+            
+            <button class="salle-btn transition duration-500 hover:scale-105 cursor-pointer pl-20 pt-14" id="salleArchiveBtn">
             <img
               src="/photo/plus-small.svg"
               alt=""
@@ -155,6 +156,16 @@
           </div>
           
         </div>
+
+      
+<!-- ========================================= -->
+
+       
+
+
+
+
+
       
     
 
@@ -236,12 +247,12 @@
                       id="post"
                       class="block w-90 p-3 ps-9 ml-2 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-4xl mt-2 focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
                     >
-                      <option>Réceptionniste</option>
-                      <option>Technicien IT</option>
-                      <option>Agent de sécurité</option>
-                      <option>Manager</option>
-                      <option>Nettoyage</option>
-                      <option>Autres rôles</option>
+                      <option value="Réceptionniste">Réceptionniste</option>
+                      <option value="Technicien IT" >Technicien IT</option>
+                      <option value="Agent de sécurité">Agent de sécurité</option>
+                      <option value="Manager">Manager</option>
+                      <option value="Nettoyage">Nettoyage</option>
+                      <option value="Autres rôles">Autres rôles</option>
                     </select>
                     <label for="email">email</label><br>
                    <input type="email" id="email" class="w-90 p-3 ps-9 ml-2 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-4xl mt-2 focus:ring-brand focus:border-brand shadow-xs placeholder:text-body" placeholder="email" required>
@@ -288,6 +299,48 @@
                 
              
             </div>
+       <!-- modal of limits -->
+        <div class="modalError z-50 hidden">
+              <el-dialog>
+  <dialog id="dialog" aria-labelledby="dialog-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-y-auto bg-transparent backdrop:bg-transparent">
+    <el-dialog-backdrop class="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"></el-dialog-backdrop>
+
+    <div tabindex="0" class="flex min-h-full items-end justify-center p-4 text-center focus:outline-none sm:items-center sm:p-0">
+      <el-dialog-panel class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95">
+        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div class="sm:flex sm:items-start">
+            <div class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6 text-red-600">
+                <path d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+              <h3 id="dialog-title" class="text-base font-semibold text-gray-900">Deactivate account</h3>
+              <div class="mt-2">
+                <p class="text-sm text-gray-500">Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+          <button type="button" command="close" commandfor="dialog" class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto">Deactivate</button>
+          <button type="button" command="close" commandfor="dialog" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
+        </div>
+      </el-dialog-panel>
+    </div>
+  </dialog>
+</el-dialog> 
+</div>
+
+
+
+
+
+
+
+
+
+
           </div>
           
         </div>

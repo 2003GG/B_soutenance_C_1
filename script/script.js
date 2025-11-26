@@ -10,21 +10,15 @@ let placework = document.querySelector(".place");
 let imgpreview = document.getElementById("img_pro");
 let addExperienceBtn = document.getElementById("addexperrience");
 let form = document.querySelector("#form");
-let securityBtn = document.getElementById("salleSecuriteBtn");
-let serveurBtn = document.getElementById("salleServeursBtn");
-let personnelBtn = document.getElementById("sallePersonnelBtn");
-let receptionBtn = document.getElementById("ReceptionBtn");
-let conferenceBtn = document.getElementById("salleConferenceBtn");
-let archiveBtn = document.getElementById("salleArchiveBtn");
+let sallesBtn = document.querySelectorAll(".salle-btn");
 let deletWorker = document.querySelector("#deletExpbtn");
-let nameWorker=document.querySelector("#name");
-let emailWorker=document.querySelector("#email");
-let phoneWorker=document.querySelector("phone_number");
-
-
-
-
-  
+let nameWorker = document.querySelector("#name");
+let emailWorker = document.querySelector("#email");
+let phoneWorker = document.querySelector("#phone_number");
+let countServeur = 0;
+let countSecurity = 0;
+let countReception = 0;
+let countArchive = 0;
 
 let cancelModal = document.getElementById("cancel");
 let save = document.getElementById("save");
@@ -33,41 +27,47 @@ function initapplication() {
   addWorkerBtn.addEventListener("click", openModal);
   cancelModal.addEventListener("click", closeModal);
   save.addEventListener("click", saveModal);
-  
+
   addExperienceBtn.addEventListener("click", addexperrience);
   imgprofile.addEventListener("input", change_img);
-    archiveBtn.addEventListener("click",  archiveZone);
-  serveurBtn.addEventListener("click",  serveurZone);
-  securityBtn.addEventListener("click",  securityZone);
-  personnelBtn.addEventListener("click",  personnalZone);
-  conferenceBtn.addEventListener("click",conferenceZone);
-  receptionBtn.addEventListener("click", ReceptionZone);
+  sallesBtn.forEach((btn) => {
+    btn.addEventListener("click", generaleZone);
+  });
 }
 
-// function validationCart() {
-//   const nameregex = /^[a-zA-Z\s?]+$/;
-// const emilregex = /^[\w.-]+@[\w.-]+.\w{2,}$/;
-// const numberregex = /^0[67]\d{8}$/;
+function validateInputs() {
+  const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/; 
+  const emailRegex = /^[\w.-]+@[\w.-]+\.\w{2,}$/;
+  const phoneRegex = /^0[5-7]\d{8}$/;
 
-// let user =true;
-//     if (!nameregex.test(nameWorker.value)) {
-//         nameWorker.style.borderColor = "red";
-//         user=false;
-//     } else nameWorker.style.borderColor = "green";
+  let valid = true;
 
-//     if (!emilregex.test(emailWorker.value)) {
-//         emailWorker.style.borderColor = "red";
-//        user=false;
-//     } else emailWorker.style.borderColor = "green";
+  // NAME
+  if (!nameRegex.test(nameWorker.value.trim())) {
+    nameWorker.style.borderColor = "red";
+    valid = false;
+  } else {
+    nameWorker.style.borderColor = "green";
+  }
 
-//     if (!numberregex.test(phoneWorker.value)) {
-//         phoneWorker.style.borderColor = "red";
-//        user=false;
-//     } else phoneWorker.style.borderColor = "green";
-    
-// return user;
-// }
+  // EMAIL
+  if (!emailRegex.test(emailWorker.value.trim())) {
+    emailWorker.style.borderColor = "red";
+    valid = false;
+  } else {
+    emailWorker.style.borderColor = "green";
+  }
 
+  // PHONE
+  if (!phoneRegex.test(phoneWorker.value.trim())) {
+    phoneWorker.style.borderColor = "red";
+    valid = false;
+  } else {
+    phoneWorker.style.borderColor = "green";
+  }
+
+  return valid;
+}
 
 
 function openModal() {
@@ -87,38 +87,38 @@ function change_img() {
 }
 
 function saveModal(event) {
-  
   event.preventDefault();
- 
-//  if(validationCart()){
+
+  if (!validateInputs()) {
+  
+    return;
+  }
+
+
+  
   let worker = {
     url: imgprofile.value.trim(),
-    name: document.getElementById("name").value,
+    name: nameWorker.value.trim(),
     age: document.getElementById("age").value,
-    phone: document.getElementById("phone_number").value,
-    email:document.getElementById("email").value,
+    phone: phoneWorker.value.trim(),
+    email: emailWorker.value.trim(),
     post: document.getElementById("post").value,
     id: Date.now(),
-    experience: tempExperience   
+    experience: tempExperience,
   };
 
   data.push(worker);
-
-  tempExperience = [];  
-//  }
   createCart(worker);
   closeModal();
   form.reset();
- 
 }
 
 
+
 function createCart(worker) {
-
   let cardWorker = document.createElement("div");
-   cardWorker.setAttribute("data-id",worker.id);
+  cardWorker.setAttribute("data-id", worker.id);
   cardWorker.classList.add("cart");
-
 
   cardWorker.innerHTML = `
     <div class="border-0 rounded-4xl bg-white shadow-cyan-100 h-25 w-90 mt-6 ml-3">
@@ -126,7 +126,6 @@ function createCart(worker) {
 
       <div class="flex justify-between">
         <img src="${worker.url}" class="h-12 w-12 rounded-4xl">
-
         <button onclick="deleteCart(${worker.id})" class="mr-10">
           <img src="/photo/delete.svg">
         </button>
@@ -142,9 +141,7 @@ function createCart(worker) {
 }
 
 function deleteCart(id) {
-
-
-  data = data.filter(w => w.id !== id);
+  data = data.filter((w) => w.id !== id);
 
   let cardElement = document.querySelector(`[data-id="${id}"]`);
   if (cardElement) {
@@ -152,11 +149,10 @@ function deleteCart(id) {
   }
 }
 
-
 // infoWorker(): this function display the information about workers when we click a button(show). Problem
 function infoWorker(id) {
-
-  let workerIdFind = data.find(w => w.id === id);
+  let workerIdFind = data.find((w) => w.id === id);
+  console.log(workerIdFind.experience);
   if (!workerIdFind) return;
 
   let modalinformation = document.createElement("div");
@@ -204,12 +200,10 @@ function infoWorker(id) {
         <br><br>
     `;
     expList.appendChild(item);
-    expdiv.appendChild(expList)
+    expdiv.appendChild(expList);
   });
-   sidebar.appendChild(modalinformation);
+  sidebar.appendChild(modalinformation);
   modalinformation.appendChild(expdiv);
-
- 
 }
 
 // addexperrience(): this function creat a cart (input) to add athores expriences
@@ -234,29 +228,20 @@ function addexperrience() {
 
   experiencePlace.appendChild(mydivInputDate);
 
-  //-----------------------------------------------
-  // FIX → push to tempExperience when user finishes typing
-  //-----------------------------------------------
-  expInput.addEventListener("blur", () => {
-    tempExperience.push({
-      dateStart: startInput.value,
-      dateEnd: endInput.value,
-      exp: expInput.value
-    });
+  tempExperience.push({
+    dateStart: startInput.value,
+    dateEnd: endInput.value,
+    exp: expInput.value,
   });
+  console.log(tempExperience);
 }
-
-
-
 
 // add workers in zones
 // ModalWorkersZone(): this function creet a modal of the workers who already filterd . i add this function in all the 6 filter function
 // function ModalWorkersZone() {
- 
 
 //   return divafficheinfo;
 // }
-
 
 function closeModalZone() {
   let cancelModalZones = document.querySelector(".modalZones");
@@ -267,8 +252,8 @@ function closeModalZone() {
 // function addWorkerArchive() : the funcrion do  filter of workers whocan  get inside the archive zone
 function openModalFilter() {
   backgroundvisibilty.classList.add("blur-sm");
-  placework.classList.replace("place" ,"hidden");
-   let divafficheinfo = document.createElement("div");
+  placework.classList.replace("place", "hidden");
+  let divafficheinfo = document.createElement("div");
 
   divafficheinfo.innerHTML = `
           <div
@@ -276,7 +261,7 @@ function openModalFilter() {
           >
             <div
               class="zoneFilter  transform  overflow-visible h-200 w-100 rounded-lg bg-white text-left shadow-xl transition-all">
-              <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div
                   class=" mx-auto flex size-12 items-center justify-center sm:mx-0 sm:size-10">
                   <button onclick="closeModalZone()">
@@ -288,226 +273,139 @@ function openModalFilter() {
               </div>
             `;
 
-  sidebar.appendChild(divafficheinfo);  
+  sidebar.appendChild(divafficheinfo);
   return divafficheinfo;
 }
 
-function archiveZone() {
+function checkRestrictions(post, salle) {
+ 
+ 
+  switch (salle) {
+    case "serveurs-salle":
+      return post == "Technicien IT" || post == "Nettoyage" || post == "Manager";
+
+    case "security-salle":
+      return post == "Agent de sécurité" || post == "Nettoyage" || post == "Manager"
+
+    case "Reception-salle":
+      
+      return  post == "Réceptionniste" || post == "Nettoyage" || post == "Manager";
+
+    case "archive-salle":
+      return post != "Nettoyage";
+    default:
+      return true;
+  }
+}
+function removeWorkerFromUI(id) {
+
+  // Remove from modal list
+  let modalCard = document.querySelector(`.modalZones [data-id="${id}"]`);
+  if (modalCard) modalCard.remove();
+
+  // Remove from sidebar card
+  let sidebarCard = document.querySelector(`.visibilty [data-id="${id}"]`);
+  if (sidebarCard) sidebarCard.remove();
+}
+
+
+
+
+
+
+function generaleZone(e) {
+
   let modal = openModalFilter();
   let ModalFilter = modal.querySelector(".zoneFilter");
+  let modalError = document.querySelector(".modalError"); 
 
-  let workersArchiveZone = data.filter(w => w.post === "Manager");
-
-  workersArchiveZone.forEach((w) => {
-
-    let card = document.createElement("div");
-    card.classList.add("cart");
-    card.setAttribute("data-id", w.id);
-
-    card.innerHTML = `
-      <div class="border-0 rounded-4xl bg-gray-600 shadow-cyan-100 h-25 w-90 mt-6 ml-3">
-        <span class="text-white text-center pl-10">${w.name}</span>
-        <div class="flex justify-between">
-          <img src="${w.url}" class="h-12 w-12 rounded-4xl">
-          <button onclick="deleteCart(${w.id})" class="mr-10">
-            <img src="/photo/delete.svg">
-          </button>
-        </div>
-        <button onclick="infoWorker(${w.id})" class="pl-70 text-white">
-         
+  ModalFilter.innerHTML = `
+  <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+      <div class="mx-auto flex size-12 items-center justify-center sm:mx-0 sm:size-10">
+        <button onclick="closeModalZone()">
+          <img src="/photo/cross-small.svg" alt="">
         </button>
       </div>
-    `;
+  </div>`;
 
-    ModalFilter.appendChild(card);
+  let salles = document.querySelectorAll(".salle");
+
+  salles.forEach((salle) => {
+
+    let filteremployee = data.filter(
+      (w) =>
+        salle.id ==
+          e.target.parentElement.parentElement.parentElement.id &&
+        checkRestrictions(w.post, salle.id)
+    );
+
+    filteremployee.forEach((w) => {
+
+      let card = document.createElement("div");
+      card.classList.add("cart");
+      card.setAttribute("data-id", w.id);
+
+      card.innerHTML = `
+      <div class="cartinfo items-center border-2 rounded-2xl bg-white shadow-cyan-100 h-16 w-50 mt-6 ml-20">
+        <span class="text-white text-center pl-10">${w.name}</span>
+        <div class="flex justify-between items-center">
+          <img src="${w.url}" class="h-10 w-10 rounded-4xl pl-2">
+          <button id="btn-${w.id}" class="border-0 rounded-full bg-blue-500 h-7 w-7">
+            <span class="material-symbols-outlined">add</span>
+          </button>
+        </div>
+      </div>
+      `;
+
+      ModalFilter.appendChild(card);
+
+      let addbtn = document.querySelector(`#btn-${w.id}`);
+
+      addbtn.addEventListener("click", () => {
+
+        let room = salle.id;
+
+        let roomIsAvailable = true;
+
+        if (room === "serveurs-salle" && countServeur >= 3) roomIsAvailable = false;
+        if (room === "security-salle" && countSecurity >= 4) roomIsAvailable = false;
+        if (room === "Reception-salle" && countReception >= 4) roomIsAvailable = false;
+        if (room === "archive-salle" && countArchive >= 4) roomIsAvailable = false;
+
+        if (!roomIsAvailable) {
+          modalError.classList.replace("hidden", "visible");
+          return;
+        }
+
+        
+        removeWorkerFromUI(w.id);
+
+        
+        salle.appendChild(card);
+        addbtn.remove();
+
+       
+        if (room === "serveurs-salle") countServeur++;
+        if (room === "security-salle") countSecurity++;
+        if (room === "Reception-salle") countReception++;
+        if (room === "archive-salle") countArchive++;
+   if(countServeur>0 || countSecurity>0 || countArchive>0){
+       salle.classList.replace("bg-red-500","bg-gray-800");
+      
+}
+        
+      });
+    });
   });
 }
 
-
-
-function serveurZone() {
-  let modal = openModalFilter();
-  let ModalFilter = modal.querySelector(".zoneFilter");
-  let serveurSalle = document.querySelector(".serveurs-salle");
-  let workersServeurs = data.filter(w => w.post === "Technicien IT");
-
-  workersServeurs.forEach((w) => {
-
-    let card = document.createElement("div");
-    card.classList.add("cart");
-    card.setAttribute("data-id", w.id);
-
-    card.innerHTML = `
-      <div class="border-2 rounded-4xl bg-white shadow-cyan-100 h-25 w-90 mt-6 ml-3">
-        <span class="text-black text-center pl-10">${w.name}</span>
-        <div class="flex justify-between">
-        <img class="h-12 w-12 rounded-4xl" src="${w.url}">
-       
-          <button id="btn-${w.id}" class=" border-0 rounded-full bg-blue-500 h-9 w-9">
-             <span class="material-symbols-outlined">
-                     add
-                        </span>
-          </button>
-        </div>
-        
-      </div>
-    `;
-    
-
-    ModalFilter.appendChild(card);
-    let addbtn=document.querySelector(`#btn-${w.id}`);
-   addbtn.addEventListener("click",()=>{
-      serveurSalle.appendChild(card);
-    })
-  });
-  
-    
-
-  
-}
-
-
-function securityZone() {
-  let modal = openModalFilter();
-  let ModalFilter = modal.querySelector(".zoneFilter");
-
-  let workersSecurite = data.filter(w => w.post === "Agent de sécurité");
-
-  workersSecurite.forEach((w) => {
-
-    let card = document.createElement("div");
-    card.classList.add("cart");
-    card.setAttribute("data-id", w.id);
-
-    card.innerHTML = `
-      <div class="border-2 rounded-4xl bg-white shadow-cyan-100 h-25 w-90 mt-6 ml-3">
-        <span class="text-black text-center pl-10">${w.name}</span>
-        <div class="flex justify-between">
-        <img class="h-12 w-12 rounded-4xl" src="${w.url}">
-       
-          <button id="${w.id}" class=" border-0 rounded-full bg-blue-500 h-9 w-9">
-             <span class="material-symbols-outlined">
-                     add
-                        </span>
-          </button>
-        </div>
-        
-      </div>
-    `;
-
-    ModalFilter.appendChild(card);
-  });
-}
-
- 
-  function ReceptionZone(){
-    
-   let modal = openModalFilter();
-  let ModalFilter = modal.querySelector(".zoneFilter");
-
-  let workersServeurs = data.filter(w => w.post === "Réceptionniste" ||
-    w.post === "Manger"
-  );
-
-  workersServeurs.forEach((w) => {
-
-    let card = document.createElement("div");
-    card.classList.add("cart");
-    card.setAttribute("data-id", w.id);
-
-    card.innerHTML = `
-      <div class="border-2 rounded-4xl bg-white shadow-cyan-100 h-25 w-90 mt-6 ml-3">
-        <span class="text-black text-center pl-10">${w.name}</span>
-        <div class="flex justify-between">
-        <img class="h-12 w-12 rounded-4xl" src="${w.url}">
-       
-          <button id="${w.id}" class=" border-0 rounded-full bg-blue-500 h-9 w-9">
-             <span class="material-symbols-outlined">
-                     add
-                        </span>
-          </button>
-        </div>
-        
-      </div>
-    `;
-
-    ModalFilter.appendChild(card);
-  });
-} 
-
- 
-function conferenceZone(){
-
-   let modal = openModalFilter();
-  let ModalFilter = modal.querySelector(".zoneFilter");
-
- let workersConference = data.filter(w => 
-  w.post === "Nettoyage" || 
-  w.post === "Manager" || 
-  w.post === "Autres rôles"
-);
-
-  workersConference.forEach((w) => {
-
-    let card = document.createElement("div");
-    card.classList.add("cart");
-    card.setAttribute("data-id", w.id);
-
-    card.innerHTML = `
-      <div class="border-2 rounded-4xl bg-white shadow-cyan-100 h-25 w-90 mt-6 ml-3">
-        <span class="text-black text-center pl-10">${w.name}</span>
-        <div class="flex justify-between">
-        <img class="h-12 w-12 rounded-4xl" src="${w.url}">
-       
-          <button id="${w.id}" class=" border-0 rounded-full bg-blue-500 h-9 w-9">
-             <span class="material-symbols-outlined">
-                     add
-                        </span>
-          </button>
-        </div>
-        
-      </div>
-    `;
-
-    ModalFilter.appendChild(card);
-  });
-}
- 
-
-
- function personnalZone(){
-   let modal = openModalFilter();
-  let ModalFilter = modal.querySelector(".zoneFilter");
-
-let workersPersonnel = data.filter(
-    w => w.post === "Nettoyage" || w.post === "Manager" || w.post === "Autres rôles");
-
-  workersPersonnel.forEach((w) => {
-
-    let card = document.createElement("div");
-    card.classList.add("cart");
-    card.setAttribute("data-id", w.id);
-`
-      <div class="border-2 rounded-4xl bg-white shadow-cyan-100 h-25 w-90 mt-6 ml-3">
-        <span class="text-black text-center pl-10">${w.name}</span>
-        <div class="flex justify-between">
-        <img class="h-12 w-12 rounded-4xl" src="${w.url}">
-       
-          <button id="${w.id}" class=" border-0 rounded-full bg-blue-500 h-9 w-9">
-             <span class="material-symbols-outlined">
-                     add
-                        </span>
-          </button>
-        </div>
-        
-      </div>
-    `;
-
-    ModalFilter.appendChild(card);
-  });
-}
+// function limit(){
+//   let modalError=document.querySelector(".modalError");
+//    if(security>3 || ser>2 ||Reception>3 || archive>3){
+//    }
+//         modalError.classList.remove("hidden");   
+// }
 
 
 
 initapplication();
-console.log(data);
